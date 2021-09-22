@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:login_register/Screens/ilacEkranlari/ilaciReceteyeEkle.dart';
 import 'package:login_register/Screens/profilScreen/components/rounded_button.dart';
@@ -5,6 +6,7 @@ import 'package:login_register/Screens/profilScreen/components/rounded_input_fie
 import 'package:login_register/Screens/profilScreen/components/rounded_password_field.dart';
 import 'package:login_register/Screens/profilScreen/hastaProfil.dart';
 import 'package:login_register/Screens/profilScreen/hastaRegister.dart';
+import 'package:login_register/Screens/receteGosterme/receteGostermeScreen.dart';
 
 class HastaLogin extends StatefulWidget {
 
@@ -13,6 +15,9 @@ class HastaLogin extends StatefulWidget {
 }
 
 class _HastaLoginState extends State<HastaLogin> {
+
+  TextEditingController eMail = TextEditingController();
+  TextEditingController password = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,19 +56,31 @@ class _HastaLoginState extends State<HastaLogin> {
                         SizedBox(height:10),
                         Text("Giriş Ekranı", style: TextStyle(color:Colors.lightBlue,fontSize: 25),),
                         SizedBox(height:5),
-                        RoundedInputField(
-                      icon: Icons.account_circle_sharp,
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(60,2,60,5),
+                          child: TextField(
+                            textAlign: TextAlign.center,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
 
-                              hintText: "Email:",
-                              onChanged: (value) {},
-                            ),
-                        SizedBox(height:1),
-                        RoundedPasswordField(
-
-
-
-                          onChanged: (value) {},
+                              labelText: 'E Posta:', ),
+                            controller: eMail,
+                          ),
                         ),
+                        SizedBox(height:1),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(60,2,60,5),
+                          child: TextField(
+                            textAlign: TextAlign.center,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
+
+                              labelText: 'Şifre:', ),
+                            controller: password,
+                          ),
+                        ),
+
+
                         RoundedButton(
 
                           text: "Giriş Yap",
@@ -96,8 +113,15 @@ class _HastaLoginState extends State<HastaLogin> {
 
     );
   }
-  girisYap(){
-    Navigator.push(context,MaterialPageRoute(builder: (context)=>HastaProfil()),);
+  Future<void> girisYap() async{
+    await FirebaseAuth.instance.signInWithEmailAndPassword(email: eMail.text, password: password.text).then((kullanici){
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context)=>ReceteGosterme(),),
+      );
+      
+    }).whenComplete(() => print("Giriş Yapıldı"));
+
   }
   doktorgirisYap(){
     Navigator.push(context,MaterialPageRoute(builder: (context)=>ilaciReceteyeEkle()),);
