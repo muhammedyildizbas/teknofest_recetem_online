@@ -25,7 +25,13 @@ class _HastaRegisterState extends State<HastaRegister> {
 
   @override
   Widget build(BuildContext context) {
-    final snackBar = SnackBar(content: Text('Yanlış birşey var'));
+    final snackBar = SnackBar(content: Text('Yanlış birşey var'),
+      action: SnackBarAction(
+        label: 'Geri dön',
+        onPressed: () {
+          // Some code to undo the change.
+        },
+      ),);
     return Scaffold(
         backgroundColor: Colors.lightBlueAccent,
         body: Center(
