@@ -117,7 +117,7 @@ class _HastaLoginState extends State<HastaLogin> {
     await FirebaseAuth.instance.signInWithEmailAndPassword(email: eMail.text, password: password.text).then((kullanici){
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context)=>ReceteGosterme(),),
+        MaterialPageRoute(builder: (context)=>HastaProfil(),),
       );
       
     }).whenComplete(() => print("Giriş Yapıldı"));
