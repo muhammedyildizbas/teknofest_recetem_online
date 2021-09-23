@@ -98,7 +98,7 @@ class _HastaRegisterState extends State<HastaRegister> {
                                 keyboardType: TextInputType.number,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'lütfen türk TC numaranızı giriniz';
+                                    return 'lütfen TC numaranızı giriniz';
                                   } else if (value.length < 11) {
                                     return 'Lütfen tam numaranızı girdiğinizden emin olun';
                                   }
