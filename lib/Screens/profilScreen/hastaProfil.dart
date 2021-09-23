@@ -17,6 +17,7 @@ class _HastaProfilState extends State<HastaProfil> {
             child: Center(
           child: Container(
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 SizedBox(
                   height: 30,
@@ -36,9 +37,12 @@ class _HastaProfilState extends State<HastaProfil> {
                     borderRadius: BorderRadius.all(Radius.circular(40)),
                     color: Colors.lightBlueAccent,
                   ),
-                  height: 900,
-                  width: 500,
+                  constraints: BoxConstraints(
+                    maxHeight: 600,
+                    minWidth: double.infinity,
+                  ),
                   child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
                         "\nAtakan Demir\n",
@@ -136,59 +140,39 @@ class _HastaProfilState extends State<HastaProfil> {
                       SizedBox(
                         height: 15,
                       ),
-                      RaisedButton(
-                        onPressed: amethod,
-                        child: Text("Bilgilerimi Güncelle"),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(75, 20, 0, 0),
-                        child: Row(
-                          children: [
-                            Center(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10)),
-                                  color: Colors.greenAccent,
-                                ),
-                                width: 110,
-                                height: 60,
-                                child: Row(
-                                  children: [
-                                    SizedBox(width: 10),
-                                    Icon(Icons.alarm),
-                                    SizedBox(width: 3),
-                                    Text("Alarmlar"),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            SizedBox(width: 20),
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                                color: Colors.greenAccent,
-                              ),
-                              width: 110,
-                              height: 60,
-                              child: GestureDetector(
-                                onTap: (){recetedekiIlaclarSayfasi();},
-                                child: Container(
-                                  child: Row(
-                                    children: [
-                                      SizedBox(width: 2),
-                                      Icon(Icons.assignment),
-                                      SizedBox(width: 3),
-                                      Text("Reçete\nİşlemleri"),
-                                    ],
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          RaisedButton(
+                            onPressed: amethod,
+                            child: Text("Bilgilerimi Güncelle"),
+                          ),
+
+                          FittedBox(
+                            child: TextButton.icon(
+                                style: ButtonStyle(
+                                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(15.0),
+                                        //side: BorderSide(color: Colors.black54)
+                                      )
                                   ),
+                                  backgroundColor: MaterialStateProperty.all<Color>(Colors.greenAccent),
+                                  padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(10)),
+                                  foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
                                 ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
+                                onPressed: () {
+                                  recetedekiIlaclarSayfasi();
+                                },
+                                icon: Icon(Icons.assignment),
+                                label: Text("Reçete İşlemleri")),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
                     ],
                   ),
                 ),
