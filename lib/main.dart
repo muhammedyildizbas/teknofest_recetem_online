@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
 
       home:Scaffold(
 
-        body: HastaProfil(),
+        body: Home(),
       ),
     );
   }
